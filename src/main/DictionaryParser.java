@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
+import exception.DictionaryParserException;
+
 public class DictionaryParser {
 	private BufferedReader reader;
 	private String nextLine;
@@ -30,8 +32,12 @@ public class DictionaryParser {
 		return nextLine != null;
 	}
 
-	public void nextTranslation() throws IOException {
+	public void nextTranslation() throws IOException, DictionaryParserException {
 		// TODO Auto-generated method stub
+		if("".equals(nextLine)){
+			this.readNextLine();
+			throw new DictionaryParserException();
+		}
 		int index = nextLine.indexOf("=");
 		currentGermanWord = nextLine.substring(0, index);
 		currentTranslation = nextLine.substring(index + 1);

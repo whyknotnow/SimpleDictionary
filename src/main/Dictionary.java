@@ -1,16 +1,17 @@
 package main;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
+
+import exception.DictionaryParserException;
 
 public class Dictionary {
 
 	private Map translations = new HashMap();
 	
-	public Dictionary(Reader in) throws IOException {
+	public Dictionary(Reader in) throws IOException, DictionaryParserException {
 		// TODO Auto-generated constructor stub
 		this.readTranslation(in);
 	}
@@ -19,7 +20,7 @@ public class Dictionary {
 		// TODO Auto-generated constructor stub
 	}
 
-	private void readTranslation(Reader reader) throws IOException{
+	private void readTranslation(Reader reader) throws IOException, DictionaryParserException{
 		// TODO Auto-generated method stub
 		DictionaryParser parser = new DictionaryParser(reader);
 		while(parser.hasNextTranslation()){
